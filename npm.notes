@@ -21,3 +21,5 @@ npm outdated #lists local packages with updates
 npm update -g <package> #update a global package
 npm outdated -g --depth=0 #lists global packages with updates
 npm rebuild <package_name> #Solve support issues with packages if uninstall/reinstall doesn't work
+npm list --depth 0 -g #lists global installed packages
+npm list -g #lists all global installed packages
