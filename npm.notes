@@ -1,0 +1,23 @@
+Installation / Management
+===========================
+*Installed with nodejs*
+npm -v #check npm version
+npm install npm@latest -g #update npm with latest stable release 
+
+Manage local packages through package.json
+===========================
+npm init #Initiates questionnaire to create package.json file
+npm init -y #Creates package.json file with default values
+
+Commands
+===========================
+npm install <package_name> #install package locally
+npm install -g <package_name> #install package globally
+npm uninstall <package_name> #uninstall package
+npm uninstall --save <package_name> #uninstall a local package and remove dependency from package.json
+npm uninstall -g <package> #uninstall a global package
+npm update #run in the same directory as the package.json file of the application that you want to update.
+npm outdated #lists local packages with updates
+npm update -g <package> #update a global package
+npm outdated -g --depth=0 #lists global packages with updates
+npm rebuild <package_name> #Solve support issues with packages if uninstall/reinstall doesn't work
