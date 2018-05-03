@@ -1,6 +1,7 @@
 # Udacity Mobile Web Development - Accessible & Responsive Web Apps #
 ------------------------------------------------------------------------
 __Viewport__ defines the current visible area of a web page
+
 __Setting the Viewport in HTML5__
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
