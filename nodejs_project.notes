@@ -1,0 +1,144 @@
+Setup
+======================================
+mkdir project_name #Create project_name directory
+npm init #Create package.json file in project_name directory 
+npm install --save express #Install express in project_name directory
+npm i express-generator --save-dev
+URL: https://expressjs.com/en/starter/generator.html
+express --view=hbs -hbs --git
+
+# nodemon, browser-sync and gulp
+# Install browser-sync and gulp globally
+URL: https://www.npmjs.com/package/gulp
+URL: https://www.npmjs.com/package/browser-sync
+npm i -g browser-sync gulp --save-dev
+# Install nodemon and gulp-nodemon globally
+URL: https://www.npmjs.com/package/gulp-nodemon
+npm i -g nodemon gulp-nodemon --save-dev
+
+
+#Create project_name.js file, index.js is default
+[js]
+//project_name.js
+const express = require('express');
+
+const app = express();
+
+// How middleware works
+app.use((req, res, next) => {
+	console.log(Date.now());
+	next();
+});
+
+// Index Route
+app.get('/', (req, res) => {
+	res.send('INDEX');
+});
+
+// About Route
+app.get('/about', (req, res) => {
+	res.send('ABOUT');
+});
+
+const port = 5000;
+
+app.listen(port, () =>{
+	console.log(`Server started on port ${port}`);
+});
+[end]
+
+npm install -g nodemon #install nodemon
+ 
+Additional Node Modules and Resources
+===============================================
+URL: https://expressjs.com/
+
+URL: http://handlebarsjs.com/
+URL: https://github.com/ericf/express-handlebars
+npm install express-handlebars --save
+
+URL: https://github.com/expressjs/method-override
+npm install method-override --save
+
+URL: http://mongoosejs.com/
+URL: https://github.com/Automattic/mongoose
+npm install mongoose --save
+
+URL: https://github.com/expressjs/body-parser
+npm install body-parser --save
+
+URL: https://github.com/expressjs/session
+npm install express-session --save
+
+URL: https://github.com/jaredhanson/connect-flash
+npm install connect-flash --save
+
+URL: http://www.passportjs.org/
+
+Mongodb
+===============================================
+# start mongodb specifying to database path 
+sudo mongod --dbpath "/var/lib/mongodb"
+
+# example database commands
+db.users.findOneAndUpdate({email: '4@4.com'},{"$set":{lockAccountCounter:3}})
+db.users.find({email:'4@4.com'})
+db.users.deleteMany({email:'4@4.com'})
+use database-name
+
+# create database backup
+// While Mongodb is running
+mongodump
+# Options
+ --host mongodb.example.net
+ --port 27017
+ --out /data/backup # output directory
+ --collection myCollection --db test # backup specific database collection
+ --username user --password "pass" # used when backingup an external database
+
+ # restoring a backup
+ // While Mongodb is running
+ mongorestore --port <port number> <path to the backup>
+
+Delpoying Mongodb to MLab
+===============================================
+Create new MongoDB Deployments
+Create new user
+Connect using a driver via the standard MongoDB URI:
+mongodb://<dbuser>:<dbpassword>@ds247690.mlab.com:47690/test-prod
+
+Build database.js config file for app:
+[js]
+if (process.env.NODE_ENV === 'production') {
+	module.exports = {mongoURI: 'mongodb://<dbuser>:<dbpassword>@ds247690.mlab.com:47690/test-prod'}
+} else {
+	module.exports = {mongoURI: 'mongodb://localhost/temp'}
+}
+[end]
+
+Edit app.js file:
+[js]
+// DB Config
+const db = require('./config/database')
+
+// Connect to Mongoose
+mongoose.connect(db.mongoURI, {
+})
+.then(() => console.log('MongoDB Connected'))
+.catch(err => console.log(err));
+[end]
+
+Delpoying to Heroku
+===============================================
+Install Heroku CLI on system:
+https://devcenter.heroku.com/articles/heroku-cli
+
+Initialize git repository and commit necessary files
+Login to heroku-cli:
+$ heroku login
+Create heroku app:
+$ heroku create
+Set remote repository:
+$ heroku git:remote -a <heroku-app-address>
+Push repository to remote:
+$ git push heroku master
