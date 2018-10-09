@@ -1,4 +1,5 @@
 # Udacity Mobile Web Development - Accessible & Responsive Web Apps
+
 ### Responsive Layout  
 ------------------------------------------------------------------------
 - __Hardware Pixels:__ The amount of physical pixals on device  
