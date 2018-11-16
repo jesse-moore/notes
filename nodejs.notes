@@ -1,7 +1,0 @@
-Installation and Management
-===========================
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - #install nodejs
-sudo apt-get install -y nodejs
-
-Commands
-===========================
