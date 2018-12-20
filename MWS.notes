@@ -1,5 +1,0 @@
-HTTP Request
-=========================================
-Netcat - 
-nc google.com 80
-GET / HTTP/1.1
