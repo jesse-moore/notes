@@ -1,7 +1,9 @@
-# Udacity Mobile Web Development - Accessible & Responsive Web Apps
+# HTML
 
-### Responsive Layout  
-------------------------------------------------------------------------
+### Definitions
+
+- __`data-` attribute:__ used to store extra data in the DOM
+- __XHTML:__ HTML written as XML and is stricter than HTML
 - __Hardware Pixels:__ The amount of physical pixels on device  
 - __Device-Independent Pixel (DIP):__ A unit of measurement to uniformly scale interfaces  
 - __Device Pixel Ratio__ A ratio between Hardware pixels and DIP  
@@ -13,7 +15,51 @@
 - __Tap targets:__ Fingers are about 40 css pixels wide, so make the targets 48 pixels wide and - tall. Some tap targets can be smaller but use 40 pixels between them.  
 - __Media Queries:__  
 - __Flexbox:__  
-- __Breakpoints:__  
+- __Breakpoints:__ 
+
+### DOCTYPE
+
+- Document Type - Tells the user agents what version of the HTML specifications your document is using and determines what layout mode to use. If the DOCTYPE is recognized "standards mode" or "no-quirks mode" is used if the DOCTYPE is not recognized "quirks mode" is used.
+- Placed on the first line of html file
+- HTML 4.01 the DOCTYPE refers to a DTD (Document Type Definition) as HTML 4.01 is based on SGML (Standard Generalized Markup Language)
+- HTML 4.01 Example:
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+```
+
+- HTML 5 is not based on SGML and does not require a reference to a DTD
+- HTML 5 Example: `<!DOCTYPE html>`
+
+### Multilingual Sites
+
+- Client language preferences are sent by the user agent in the `Accept-Language` header.
+- The returned document should declare the lang attribute in the `<html>` tag e.g. `<html lang="en">...</html>`
+- Should allow users to choose preferred language if available
+- Be mindful of different formats in each locale such as dates, word order, and sentence or word length.
+
+### cookie, sessionStorage, and localStorage
+
+|                                        | `cookie`                                                 | `localStorage` | `sessionStorage` |
+| -------------------------------------- | -------------------------------------------------------- | -------------- | ---------------- |
+| Initiator                              | Client or server. Server can use `Set-Cookie` header     | Client         | Client           |
+| Expiry                                 | Manually set                                             | Forever        | On tab close     |
+| Persistent across browser sessions     | Depends on whether expiration is set                     | Yes            | No               |
+| Sent to server with every HTTP request | Cookies are automatically being sent via `Cookie` header | No             | No               |
+| Capacity (per domain)                  | 4kb                                                      | 5MB            | 5MB              |
+| Accessibility                          | Any window                                               | Any window     | Same tab         |
+### ```<script>```, ```<script async>```, and ```<script defer>```
+* ```<script>``` - HTML parsing is blocked, the script is fetched and executed immediately, HTML parsing resumes after the script is executed.
+* ```<script async>``` - The script will be fetched in parallel to HTML parsing and executed as soon as it is available (potentially before HTML parsing completes). Use async when the script is independent of any other scripts on the page, for example, analytics.
+* ```<script defer>``` - The script will be fetched in parallel to HTML parsing and executed when the page has finished parsing. If there are multiple of them, each deferred script is executed in the order they were encoun­tered in the document. If a script relies on a fully-parsed DOM, the defer attribute will be useful in ensuring that the HTML is fully parsed before executing. There's not much difference in putting a normal ```<script>``` at the end of ```<body>```. A deferred script must not contain document.write.
+* The async and defer attrib­utes are ignored for scripts that have no src attribute.
+### External CSS ```<link>``` and JS ```<script>``` tags placement
+* CSS ```<link>``` should be placed in the head tag of the document. When the HTML document first loads, HTML and CSS are being parsed simultaneously, if the CSS ```<link>``` tag is near the bottom of the document it prohibits progressive rendering in some browsers which results in a temporary blank page or a flash of unstyled content (FOUC).
+* JS ```<script>``` should be place at the bottom of the document unless using ```<script defer>```. ```<script>``` tags block HTML parsing while loading and will slow down the initial page load. Placing ```<script>``` tags at the end will also prevent errors if the JS manipulates the document as all the elements being manipulated will be present. 
+### Progressive Rendering
+* Techniques used to improve webpage performance.
+* Examples: Lazy image loading, Above the fold rendering, Async HTML fragments
+* Async HTML Fragments - https://www.ebayinc.com/stories/blogs/tech/async-fragments-rediscovering-progressive-html-rendering-with-marko/
 
 ### Responsive and Optimized Images  
 ------------------------------------------------------------------------
@@ -193,47 +239,3 @@ the slot the image will fill when media condition is true 440px, a last width va
 	- [Web Content Accessibility Guidelines 2.0 (WCAG)](https://www.w3.org/TR/WCAG20/)
 	- [Web Aim Checklist for WCAG 2.0](http://webaim.org/standards/wcag/checklist)
 	- [WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/)
-
-## Udacity Mobile Web Development Lesson 7 Notes
-------------------------------------------------------------------------
-### Setting up Build Process
-
-#### Installing imagemagick  
-imagemagick package URL for reference: http://www.imagemagick.org/script/index.php  
-gm package URL for reference: https://www.npmjs.com/package/gm  
-
-_imagemagick doesn't have an officlal nodejs package so I installed imagemagick for ubuntu and then
-graphicsmagick for nodejs which is a nodejs wrapper for imagemagick_
-
-- Check if imagemagick is installed:   
-`dpkg -l imagemagick`
-- Install imagemagick for ubuntu if not installed:  
-`sudo apt-get install imagemagick`
-- Check if graphicsmagick _(gm)_ is installed:  
-`npm list --depth 0 -g gm`
-- Install gm if not installed:  
-`npm install gm`
-
-#### Grunt
-Grunt references: https://gruntjs.com/getting-started  
-- Install grunt:  
-_(This will put the grunt command in your system path, allowing it to be run from any directory.)_  
-`npm install -g grunt-cli`
-- Change to the project's directory and install dependencies:  
-_(Dependencies should be listed in the package.json file)_  
-`npm install`
-- Edit and then run Grunt file:  
-`grunt`
- 
-
-
-### Running the Project Part 1 site
-Start web server from site directory:  
-`python -m SimpleHTTPServer 8080`
-
-Additional Resources:  
-Responsive image loading developed for BBC News: [Imager.js](https://github.com/BBC-News/Imager.js/)
-
-
-
-
